@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Picker Example</title>
+   
+</head>
+<body>
+    <h1>Select a Date</h1>
+    <div class="date-picker-container">
+        <label for="datePicker">Choose a date:</label>
+        <input type="date" id="datePicker" name="datePicker" min="" required>
+    </div>
+
+    <script>
+        // Set the minimum date to today's date
+        const today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+        const yyyy = today.getFullYear();
+
+        const formattedDate = `${yyyy}-${mm}-${dd}`;
+        document.getElementById('datePicker').setAttribute('min', formattedDate);
+    </script>
+</body>
+</html>
