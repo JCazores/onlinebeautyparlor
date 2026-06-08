@@ -1,8 +1,8 @@
-FROM php:8.2-cli
+FROM php:8.2-apache
 RUN apt-get update && apt-get install -y libmariadb-dev
 RUN docker-php-ext-install mysqli pdo pdo_mysql
-RUN mkdir -p /tmp/sessions && chmod 777 /tmp/sessions
-COPY bpms/ /app/
-WORKDIR /app
+RUN a2enmod rewrite
+COPY bpms/ /var/www/html/
+RUN chown -R www-data:www-data /var/www/html
 EXPOSE 80
-CMD ["php", "-d", "session.save_path=/tmp/sessions", "-S", "0.0.0.0:80"]
+CMD ["apache2-foreground"]
